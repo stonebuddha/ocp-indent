@@ -150,6 +150,10 @@ type token =
   | WITH
   | EOL
   | SPACES
+    (* MetaOCaml *)
+  | CODEOPEN
+  | CODECLOSE
+  | CODEESC
 
 let to_string = function
   | AMPERAMPER -> "AMPERAMPER"
@@ -280,3 +284,7 @@ let to_string = function
   | WITH -> "WITH"
   | EOL -> "EOL"
   | SPACES -> "SPACES"
+    (* MetaOCaml *)
+  | CODEOPEN -> "CODEOPEN"
+  | CODECLOSE -> "CODECLOSE"
+  | CODEESC -> "CODEESC"

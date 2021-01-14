@@ -29,6 +29,7 @@ module Node = struct
     | KBrace
     | KBracket
     | KBracketBar
+    | KCode
     | KLet
     | KAnd of kind
     | KLetIn
@@ -108,6 +109,7 @@ module Node = struct
     | KBrace -> "KBrace"
     | KBracket -> "KBracket"
     | KBracketBar -> "KBracketBar"
+    | KCode -> "KCode"
     (* | KField -> "KField" *)
     | KLet -> "KLet"
     | KIn -> "KIn"
@@ -1608,6 +1610,11 @@ let rec update_path config block stream tok =
   | LINE_DIRECTIVE ->
       append KUnknown (A 0) ~pad:0 block.path
   | EOL | SPACES -> assert false
+
+    (* MetaOCaml *)
+  | CODEOPEN -> open_paren KCode block.path
+  | CODECLOSE -> close ((=) KCode) block.path
+  | CODEESC -> atom block.path
 
 let update config block stream tok =
   let path = update_path config block stream tok in

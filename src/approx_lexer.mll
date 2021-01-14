@@ -508,6 +508,10 @@ rule parse_token = parse
   | "[@@" { LBRACKETATAT }
   | "[@@@" { LBRACKETATATAT }
 
+  | ".<" { CODEOPEN }
+  | ">." { CODECLOSE }
+  | ".~" { CODEESC }
+
   | "!"  { BANG }
 
   | "!=" { INFIXOP0 "!=" }
